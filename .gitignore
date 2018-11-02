@@ -1,7 +1,10 @@
+# Media (Store User-upload files)
+/.media
+
 # Project Secret
 /.secrets
 /.static
-/.media
+
 ### Django ###
 *.log
 *.pot
