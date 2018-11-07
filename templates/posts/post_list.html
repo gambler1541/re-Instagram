@@ -1,5 +1,10 @@
-<h1>Post List</h1>
+{% extends 'base.html' %}
 
-{% for post in posts %}
-    {{  post }}
-{% endfor %}
+{%  block content %}
+<div>
+    {% for post in posts %}
+    <div>{{ post.author }}</div>
+        <div><img src="{{ post.photo.url }}" alt=""></div>
+    {% endfor %}
+</div>
+{% endblock %}
