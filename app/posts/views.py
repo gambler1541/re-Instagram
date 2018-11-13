@@ -3,6 +3,7 @@ from django.shortcuts import render, redirect
 
 from members.models import User
 from .models import Post
+from .forms import PostCreateForm
 
 def post_list(request):
     posts = Post.objects.all()
@@ -23,11 +24,23 @@ def post_create(request):
     #3. render를 적절히 사용해서 해당 템플릿을 return
     #4. base.html의 nav부분에 '+ Add Post'텍스트를 갖는 a링크 추가
     #   {% url %] 태그를 사용해서 포스트 생성 으로 링크 걸어주기
+
     if request.method == 'POST':
-        Post.objects.create(
+        # Post.objects.create(
+        #     author=User.objects.first(),
+        #     photo = request.FILES['photo']
+        # )
+        # return redirect('posts:post_list')
+        post = Post(
             author=User.objects.first(),
-            photo = request.FILES['photo']
+            photo=request.FILES['photo'],
         )
+        post.save()
         return redirect('posts:post_list')
     else:
-        return render(request, 'posts/post_create.html')
+        # GET요청의 경우, 빈 Form인스턴스를 context에 담아서 전달
+        form = PostCreateForm()
+        context = {
+            'form' : form,
+        }
+        return render(request, 'posts/post_create.html', context)
