@@ -5,7 +5,14 @@
 </div>
     <form action="" enctype="multipart/form-data" method="POST">
     {% csrf_token %}
-    {{ form }}
+    {% for field in form %}
+    <div class="form-gorup">
+        <label for="{{  field.id_for_label }}">
+            {{ field.label }}
+        </label>
+        {{  field }}
+    </div>
+    {% endfor %}
     <button class="btn btn-primary btn-block">업로드</button>
     </form>
 {% endblock %}
