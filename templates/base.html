@@ -42,14 +42,18 @@
             </li>
             {% if user.is_authenticated %}
             <li class="nav-item mr-sm-1">
-                <a href="" class="btn btn-outline-secondary">Logout</a>
+                <form action="{% url 'members:logout_view' %}" method="POST">
+                {% csrf_token %}
+                    <button class="btn btn-outline-secondary"
+                            type="submit">Logout</button>
+                </form>
             </li>
             {% else %}
             <li class="nav-item">
-                <a href="" class="btn btn-outline-secondary">Login</a>
+                <a href="" class="btn btn-outline-secondary mr-sm-1">Login</a>
             </li>
             <li class="nav-item">
-                <a href="" class="btn btn-outline-secondary">SignUp</a>
+                <a href="" class="btn btn-outline-secondary mr-sm-1">SignUp</a>
             </li>
             {% endif %}
         </ul>
