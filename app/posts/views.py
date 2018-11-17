@@ -1,7 +1,6 @@
 from django.http import HttpResponse
 from django.shortcuts import render, redirect
 
-from members.models import User
 from .models import Post
 from .forms import PostCreateForm
 
@@ -32,7 +31,7 @@ def post_create(request):
         # )
         # return redirect('posts:post_list')
         post = Post(
-            author=User.objects.first(),
+            author=request.user,
             photo=request.FILES['photo'],
         )
         post.save()
