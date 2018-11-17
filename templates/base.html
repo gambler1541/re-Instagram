@@ -32,9 +32,26 @@
             <li class="nav-item mr-sm-1">
                 <a href="#" class="btn btn-outline-secondary">Favorites</a>
             </li>
-            <li class="nav-item">
-                <a href="" class="btn btn-outline-secondary">Profile</a>
+            <li class="nav-item mr-sm-1">
+                <a href="" class="btn btn-outline-secondary">
+                    Profile
+                    {%  if user.is_authenticated %}
+                        ({{ user.username }})
+                    {% endif %}
+                </a>
             </li>
+            {% if user.is_authenticated %}
+            <li class="nav-item mr-sm-1">
+                <a href="" class="btn btn-outline-secondary">Logout</a>
+            </li>
+            {% else %}
+            <li class="nav-item">
+                <a href="" class="btn btn-outline-secondary">Login</a>
+            </li>
+            <li class="nav-item">
+                <a href="" class="btn btn-outline-secondary">SignUp</a>
+            </li>
+            {% endif %}
         </ul>
     </nav>
     </div>
