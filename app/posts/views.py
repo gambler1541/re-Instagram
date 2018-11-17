@@ -1,3 +1,4 @@
+from django.contrib.auth import authenticate
 from django.http import HttpResponse
 from django.shortcuts import render, redirect
 
@@ -23,6 +24,8 @@ def post_create(request):
     #3. render를 적절히 사용해서 해당 템플릿을 return
     #4. base.html의 nav부분에 '+ Add Post'텍스트를 갖는 a링크 추가
     #   {% url %] 태그를 사용해서 포스트 생성 으로 링크 걸어주기
+    if not request.user.is_authenticated:
+        return redirect('posts:post_list')
 
     if request.method == 'POST':
         # Post.objects.create(
