@@ -16,9 +16,13 @@ Including another URLconf
 from django.conf.urls.static import static
 from django.contrib import admin
 from django.urls import path, include
+from django.views.generic import RedirectView
+
 from config import views, settings
 
 urlpatterns = [
+    # path('', views.index, name='index'),
+    path('', RedirectView.as_view(pattern_name='posts:post_list'), name='index'),
     path('admin/', admin.site.urls),
     path('posts/', include('posts.urls')),
     path('members/', include('members.urls')),
