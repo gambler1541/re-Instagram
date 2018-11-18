@@ -1,4 +1,5 @@
 from django.contrib.auth import login, authenticate, logout
+from django.contrib.auth.models import User
 from django.http import HttpResponse
 from django.shortcuts import render, redirect
 
@@ -28,7 +29,21 @@ def logout_view(request):
 
 def signup_view(request):
     if request.method == 'POST':
-        pass
+        username = request.POST['username']
+        password1 = request.POST['password1']
+        password2 = request.POST['password2']
+
+        if User.objects.filter(username=username).exists():
+            return HttpResponse(f'{username}은 이미 사용중입니다.')
+        if password1 != password2:
+            return HttpResponse('비밀번호를 확인하여 주십시요.')
+
+        user = User.objects.create_user(
+            username=username,
+            password=password1,
+        )
+        login(request, user)
+        return redirect('posts:post_list')
     else:
         form = SignupForm()
         context = {

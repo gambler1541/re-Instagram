@@ -21,7 +21,7 @@ class SignupForm(forms.Form):
     username = forms.CharField(
         widget=forms.TextInput(
             attrs={
-                'class':'form-contorl',
+                'class':'form-control',
             }
         )
     )
